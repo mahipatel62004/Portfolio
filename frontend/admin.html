@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Inquiries — Admin Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<!-- Admin key gate: shown until a valid X-Admin-Key is stored for this session -->
+<div class="key-gate" id="key-gate">
+  <h2>Admin access</h2>
+  <p>Enter your admin key to view inquiries.</p>
+  <input type="password" id="admin-key-input" placeholder="Admin API key" />
+  <button class="btn btn-primary" style="width:100%; justify-content:center;" id="admin-key-submit">Unlock dashboard</button>
+</div>
+
+<div class="admin-shell" id="admin-shell" style="display:none;">
+  <div class="admin-header">
+    <div>
+      <h1>Inquiries</h1>
+      <p>Messages submitted through the "Let's Connect" form.</p>
+    </div>
+    <a href="index.html" class="btn btn-outline">← Back to site</a>
+  </div>
+
+  <div class="toolbar">
+    <input type="text" id="search-input" placeholder="Search name, email, subject, or message…" />
+    <select id="status-filter">
+      <option value="ALL">All statuses</option>
+      <option value="NEW">New</option>
+      <option value="READ">Read</option>
+      <option value="REPLIED">Replied</option>
+    </select>
+    <select id="sort-select">
+      <option value="latest">Latest first</option>
+      <option value="oldest">Oldest first</option>
+    </select>
+  </div>
+
+  <div id="table-wrap">
+    <div class="loading-state">Loading inquiries…</div>
+  </div>
+
+  <div class="pagination" id="pagination" style="display:none;">
+    <button id="prev-page">Previous</button>
+    <span id="page-label" style="font-size:13px; color:var(--slate);"></span>
+    <button id="next-page">Next</button>
+  </div>
+</div>
+
+<!-- Detail modal -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modal-subject"></h3>
+      <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-field"><div class="k">From</div><div class="v" id="modal-from"></div></div>
+    <div class="modal-field"><div class="k">Company</div><div class="v" id="modal-company"></div></div>
+    <div class="modal-field"><div class="k">Received</div><div class="v" id="modal-date"></div></div>
+    <div class="modal-field"><div class="k">Message</div><div class="v" id="modal-message"></div></div>
+    <div class="modal-actions">
+      <button class="primary" id="mark-read">Mark as Read</button>
+      <button id="mark-replied">Mark as Replied</button>
+      <button class="danger" id="delete-inquiry">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-stack" id="toast-stack" aria-live="polite"></div>
+
+<script src="js/admin.js"></script>
+</body>
+</html>
