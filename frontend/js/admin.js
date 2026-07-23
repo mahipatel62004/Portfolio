@@ -1,4 +1,4 @@
-const API_BASE_URL = window.PORTFOLIO_API_BASE_URL || "http://localhost:5000/api";
+const API_BASE_URL = "https://portfolio-backend-dgkd.onrender.com/api";
 
 let adminKey = sessionStorage.getItem("adminKey") || "";
 let state = { search: "", status: "ALL", sort: "latest", page: 1, pageSize: 15 };
